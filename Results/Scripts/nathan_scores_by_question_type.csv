@@ -1,0 +1,7 @@
+"","workerid","questiontype","num_correct","mean_rt"
+"1",123,"control",3,1252.18181818182
+"2",123,"deception",5,907.818181818182
+"3",123,"emotion",3,984.7
+"4",123,"infer_belief",3,898
+"5",123,"motivation",4,1043.5
+"6",123,"social_norm_violation",1,1017.1

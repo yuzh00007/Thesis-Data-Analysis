@@ -1,0 +1,202 @@
+---
+title: 'Speaker Adaptation in RefGame: Models'
+output:
+  html_document:
+    df_print: paged
+date: '2026-1-13'
+---
+
+```{r setup}
+library(tidyverse)
+library(brms)
+library(beepr)
+library(showtext)
+library(bayestestR)
+```
+
+```{r cond effects}
+font_add_google('Fira Sans', 'firasans')
+showtext_auto()
+
+condEffects <- function(model, x, facet_by = c()){
+  if (length(facet_by)>0) {
+    conditions <- make_conditions(model, facet_by)
+  } else {
+    conditions <- NULL
+  }
+  
+  effects <- conditional_effects(model, effects = x, 
+                                 conditions = conditions, categorical = TRUE)
+  
+  return(effects)
+}
+```
+
+```{r}
+results <- read.csv("../data/results_after_exclusion.csv") %>% select(-X)
+results %>% group_by(subject,condition) %>% summarize(n=n())
+items <- read.csv('../data/adaptation_trials.csv') %>% select(block, UniqueId, target, competitor, distractor) %>% rename(item = UniqueId)
+
+results <- left_join(results,items,by=c('block','item','target'))
+results <- results %>% mutate(responseWhich = case_when(
+  response == target & target == pragmatictarget ~ 'pragmTarget',
+  response == competitor & target == pragmatictarget ~ 'competitor',
+  response == target & competitor == pragmatictarget ~ 'competitor',
+  response == competitor & competitor == pragmatictarget ~ 'pragmTarget',
+  response == distractor ~ 'distractor'
+))
+
+table(results$responseWhich)
+
+# 12 total, 2 on unambiguous
+distractor_responses <- results %>% subset(responseWhich == 'distractor') %>% subset(condition == 'critical')
+
+```
+### Model 1: Ordinal response in critical trials by speaker type, block, trial, and covariates
+```{r model1 prep}
+for_1 <- results %>%
+  filter(condition == "critical" & responseWhich != "distractor") %>%
+  mutate(
+    block = if_else(block == "s_0", "S0", "S1") %>%
+      factor(levels = c("S0", "S1")),
+    block_order = factor(block_order),
+    subject = factor(subject),
+    item = factor(item),
+    msgtype = if_else(msg %in% c("tr", "ci", "sq"), "shape", "color") %>%
+      factor(levels = c("shape", "color")),
+    targetPos = case_when(
+      targetPos == 0 ~ "l",
+      targetPos == 1 ~ "c",
+      targetPos == 2 ~ "r"
+    ) %>% factor(levels = c("c", "l", "r")),
+    trialQuarter = cut_number(trial, 4, labels = FALSE),
+    trialQuarter.c = trialQuarter-2.5) %>%
+  select(subject, item, msgtype, targetPos, trial, trialQuarter, trialQuarter.c, block, block_order, ordinal_response)
+
+contrasts(for_1$block) <- c(-1,1)
+contrasts(for_1$block)
+
+contrasts(for_1$block_order) <- c(-1,1)
+contrasts(for_1$block_order)
+
+contrasts(for_1$msgtype) <- c(-1, 1)
+contrasts(for_1$msgtype)
+
+contrasts(for_1$targetPos) <- contr.treatment(3)
+contrasts(for_1$targetPos)
+```
+
+```{r formula}
+formula1 <- brmsformula(ordinal_response ~ block * block_order * trialQuarter.c + msgtype + targetPos +
+                          (1 + block + block_order + trialQuarter.c + block:trialQuarter.c + block_order:trialQuarter.c | subject) +
+                          (1 | item))
+```
+
+```{r ppc}
+fit <- FALSE
+
+model1_priors <- c(
+  prior(normal(0, 5), class = "Intercept"),
+  prior(normal(0, 1), class = "b"),
+  prior_string("lkj(2)", class = "cor")
+)
+
+if(fit){
+  model1_ppc <- brm(formula1, data=for_1,
+                   family=cumulative("probit"), prior = model1_priors, 
+                   iter = 5000, warmup = 500, chains = 6, cores = 6,
+                   sample_prior = "only")
+  saveRDS(model1_ppc, "models/1_ppc.rds")
+  beep(sound = 3)
+}
+
+#model1_ppc <- readRDS("models/1_ppc.rds")
+pp_check(model1_ppc, prefix = "ppd", ndraws = 200)
+```
+
+```{r}
+condEffects(model1_ppc, "block") %>% plot()
+condEffects(model1_ppc, "trialQuarter.c", facet_by=c("block")) %>% plot()
+```
+
+PPC summary
+```{r}
+prior_summary(model1_ppc)
+```
+
+Now actually fit the model
+```{r}
+fit <- FALSE
+
+if(fit){
+  model1 <- brm(formula1, data=for_1,
+                   family=cumulative("probit"), prior = model1_priors, 
+                   iter = 12000, warmup = 2000, chains = 6, cores = 6,
+                   control = list(adapt_delta=0.99),
+                   save_pars = save_pars(all = TRUE))
+  saveRDS(model1, "models/1.rds")
+  beep(sound = 3)
+}
+
+#model1 <- readRDS("models/.rds")
+
+summary(model1)
+hdi(model1)
+
+pp_check(model1, ndraws = 200)
+```
+
+```{r}
+condEffects(model1, "block") %>% plot()
+```
+
+```{r}
+plot(model1, ask = FALSE)
+```
+### Model of fillers (confirming that confidence is not affected on fillers)
+
+```{r fillers model prep}
+for_fillers <- results %>%
+  filter(condition != "critical" & responseWhich != "distractor") %>%
+  mutate(
+    block = if_else(block == "s_0", "S0", "S1") %>%
+      factor(levels = c("S0", "S1")),
+    block_order = factor(block_order),
+    subject = factor(subject),
+    item = factor(item),
+    msgtype = if_else(msg %in% c("tr", "ci", "sq"), "shape", "color") %>%
+      factor(levels = c("shape", "color")),
+    targetPos = case_when(
+      targetPos == 0 ~ "l",
+      targetPos == 1 ~ "c",
+      targetPos == 2 ~ "r"
+    ) %>% factor(levels = c("c", "l", "r")),
+    trialQuarter = cut_number(trial, 4, labels = FALSE),
+    trialQuarter.c = trialQuarter-2.5) %>%
+  select(subject, item, msgtype, targetPos, trial, trialQuarter, trialQuarter.c, block, block_order, ordinal_response)
+
+contrasts(for_fillers$block) <- c(-1,1)
+contrasts(for_fillers$block)
+
+contrasts(for_fillers$block_order) <- c(-1,1)
+contrasts(for_fillers$block_order)
+
+contrasts(for_fillers$msgtype) <- c(-1, 1)
+contrasts(for_fillers$msgtype)
+
+contrasts(for_fillers$targetPos) <- contr.treatment(3)
+contrasts(for_fillers$targetPos)
+```
+
+```{r formula}
+model_fillers <- brm(formula1, data=for_fillers,
+                   family=cumulative("probit"), prior = model1_priors, 
+                   iter = 6000, warmup = 2000, chains = 6, cores = 6,
+                   save_pars = save_pars(all = TRUE))
+saveRDS(model1, "models/fillers.rds")
+beep(sound = 3)
+}
+
+summary(model_fillers)
+```
+

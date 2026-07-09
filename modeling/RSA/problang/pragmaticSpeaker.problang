@@ -1,0 +1,58 @@
+// set of states (here: objects of reference)
+// we represent objects as JavaScript objects to demarcate them from utterances
+// internally we treat objects as strings nonetheless
+var objects = [{color: "blue", shape: "square", string: "blue square"},
+               {color: "blue", shape: "circle", string: "blue circle"},
+               {color: "green", shape: "square", string: "green square"}]
+
+// set of utterances
+var utterances = ["blue", "green", "square", "circle"]
+
+// prior over world states
+var objectPrior = function() {
+  var obj = uniformDraw(objects)
+  return obj.string 
+}
+
+// meaning function to interpret the utterances
+var meaning = function(utterance, obj){
+  _.includes(obj, utterance)
+}
+
+// literal listener
+var literalListener = function(utterance){
+  Infer({model: function(){
+    var obj = objectPrior();
+    var uttTruthVal = meaning(utterance, obj);
+    condition(uttTruthVal == true)
+    return obj
+  }})
+}
+
+var utterancePrior = function(){
+  var obj = uniformDraw(utterances)
+  return obj
+}
+
+var cost = function(utterance){
+  var table = {
+    blue: 1,
+    green: 1,
+    circle: 1,
+    square: 1
+  };
+  return table[utterance];
+}
+
+var alpha = 2
+
+// pragmatic speaker
+var speaker = function(obj){
+  Infer({model: function(){
+    var utterance = utterancePrior();
+    factor(alpha * (literalListener(utterance).score(obj.string) - cost(utterance)))
+    return utterance
+  }})
+}
+
+viz(speaker(objects[0]))
