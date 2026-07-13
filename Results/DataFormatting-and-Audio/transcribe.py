@@ -1,12 +1,14 @@
 import speech_recognition as sr
+import time
 import numpy as np
-import timeit
 import librosa
 import scipy.io.wavfile as wavfile
 import os
 import csv
 from datetime import datetime
 import subprocess
+import logging
+logger = logging.getLogger(__name__)
 
 
 def mp3_to_wav(path: str) -> str:
@@ -20,7 +22,7 @@ def mp3_to_wav(path: str) -> str:
         str: The file path of the newly created WAV file.
     """
     # Define the output folder and create it if necessary
-    output_folder = "tmp"
+    output_folder = "./dataOutput/tmp"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -28,11 +30,8 @@ def mp3_to_wav(path: str) -> str:
     output_filename = os.path.join(
         output_folder, "converted_{:%Y%m%d%H%M%S}.wav".format(datetime.now())
     )
-
     # Load MP3 file with librosa
     audio_data, sample_rate = librosa.load(path, sr=None)
-
-    # Write to WAV format using scipy
     wavfile.write(output_filename, sample_rate, (audio_data * 32767).astype("int16"))
 
     return output_filename
@@ -76,7 +75,6 @@ def extract_text(path: str) -> str:
 
             audio = r.record(source)
             text = r.recognize_google(audio)
-            print(text)
             text = text.lower()
 
             return text
@@ -118,28 +116,33 @@ def generate_csv(text_recognized, outname):
 
 
 if __name__ == "__main__":
-    start = timeit.timeit()
+    start = time.time()
 
-    audio_folder = "./decodedAudioTest"
+    audio_folder = "./dataOutput/decodedAudio/"
     subprocess_mp3_args = ["ffmpeg", "-i", "INPUTWAV", "-vn", "-ar", "44100", "-ac", "2", "-b:a", "192k", "OUTPUTMP3"]
 
-    for folder in os.scandir(audio_folder):
-        for file in os.scandir(folder):
-            if os.path.isfile(file):
-                output_file = file.path.replace(".wav", ".mp3")
-                subprocess_mp3_args[2] = file.path
-                subprocess_mp3_args[-1] = output_file
-                subprocess.run(subprocess_mp3_args)
+    for participantFolder in os.scandir(audio_folder):
+        for audioFile in sorted(os.listdir(participantFolder)):
+            audioFilePath = participantFolder.path + "/" + audioFile
+            if os.path.isfile(audioFilePath):
+                output_file = audioFilePath.replace(".wav", ".mp3")
 
+                # in case file exists
+                if not os.path.isfile(output_file):
+                    subprocess_mp3_args[2] = audioFilePath
+                    subprocess_mp3_args[-1] = output_file
+                    subprocess.run(subprocess_mp3_args)
+
+    logger.info("starting audio transcription")
     all_transcripts = []
     for participant in os.scandir(audio_folder):
         indiv_transcripts = [participant]
-        for file in os.scandir(participant):
-            if file.name.endswith('.mp3'):
-                text = extract_text(file.path)
+        for audioFile in os.scandir(participant):
+            if audioFile.name.endswith('.mp3'):
+                text = extract_text(audioFile.path)
                 indiv_transcripts.append(text)
 
         all_transcripts.append(indiv_transcripts)
 
-    generate_csv(all_transcripts, "transcript.csv")
-    print(timeit.timeit() - start)
+    generate_csv(all_transcripts, "./dataOutput/audioTranscript.csv")
+    print(time.time() - start)
