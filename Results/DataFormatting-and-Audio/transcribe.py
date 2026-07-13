@@ -136,7 +136,8 @@ if __name__ == "__main__":
     logger.info("starting audio transcription")
     all_transcripts = []
     for participant in os.scandir(audio_folder):
-        indiv_transcripts = [participant]
+        partname = participant.name.replace("_audio", "")
+        indiv_transcripts = [partname]
         for audioFile in os.scandir(participant):
             if audioFile.name.endswith('.mp3'):
                 text = extract_text(audioFile.path)

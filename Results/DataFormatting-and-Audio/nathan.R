@@ -1,4 +1,3 @@
-library(tidyverse)
 library(jsonlite)
 library(dplyr)
 library(stringr) 
@@ -39,11 +38,6 @@ df_parsed <- df_parsed %>%
 ################################################
 # PARTICIPANT FEEDBACK
 
-#df_parsed <- df_parsed %>%
-#  unnest_wider(feedback, names_sep = "_")
-
-
-feedback
 df_feedback <- df_parsed %>%
   filter(map_lgl(feedback, ~ !is.null(.)))
 feedback <- df_feedback %>%
@@ -51,7 +45,7 @@ feedback <- df_feedback %>%
 feedback <- feedback %>%
   unnest_wider(feedback, names_sep = "_")
 
-write.csv(feedback, "nathan2_feedback.csv")
+write.csv(feedback, "./dataOutput/nathan2_feedback.csv")
 
 ################################################
 # TECHNICAL PROBLEMS WITH VIDEO
@@ -76,7 +70,7 @@ fail_summary <- df_parsed %>%
   mutate(n_failed_total = rowSums(across(where(is.numeric)))) %>%
   
   arrange(desc(n_failed_total))
-write.csv(fail_summary, "failed_questions.csv")
+write.csv(fail_summary, "./dataOutput/failed_questions.csv")
 
 ################################################
 # CONTROL CHECK
