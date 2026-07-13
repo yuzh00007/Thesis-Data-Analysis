@@ -45,12 +45,10 @@ feedback <- df_feedback %>%
 feedback <- feedback %>%
   unnest_wider(feedback, names_sep = "_")
 
-write.csv(feedback, "./dataOutput/nathan2_feedback.csv")
+write.csv(feedback, "./dataOutput/ToM/nathan2_feedback.csv")
 
 ################################################
 # TECHNICAL PROBLEMS WITH VIDEO
-
-unique(df_parsed$answer_value)
 
 fail_summary <- df_parsed %>%
   filter(answer_value == "-1")
@@ -70,7 +68,7 @@ fail_summary <- df_parsed %>%
   mutate(n_failed_total = rowSums(across(where(is.numeric)))) %>%
   
   arrange(desc(n_failed_total))
-write.csv(fail_summary, "./dataOutput/failed_questions.csv")
+write.csv(fail_summary, "./dataOutput/ToM/failed_questions.csv")
 
 ################################################
 # CONTROL CHECK
@@ -96,13 +94,13 @@ df_summary <- df_parsed %>%
   group_by(workerid, questiontype) %>%
   summarise(num_correct = sum(correct, na.rm = TRUE), mean_rt = mean(rt))
 
-write.csv(df_summary, "nathan_scores_by_question_type.csv")
+write.csv(df_summary, "./dataOutput/ToM/nathan_scores_by_question_type.csv")
 
 # score for all critical ToM questions
 full_score <- df_parsed %>%
   filter(!questiontype %in% c("control")) %>%
-  filter(!workerid %in% low_accuracy$workerid)
+  # filter(!workerid %in% low_accuracy$workerid)
   group_by(workerid) %>%
   summarise(nathan_score_full = mean(correct, na.rm = TRUE),mean_rt_nathan_full = mean(rt, na.rm = TRUE), .groups = "drop")
 
-write.csv(full_score, "nathan_scores.csv")  
+write.csv(full_score, "./dataOutput/ToM/nathan_scores.csv")  
