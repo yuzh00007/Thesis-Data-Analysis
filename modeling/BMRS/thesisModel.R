@@ -4,9 +4,9 @@ library(tidybayes)
 library(ggplot2)
 library(dplyr)
 
-getwd()
-currentDir = "/home/yzhang/Documents/Uni-Saarland/thesis/modeling/BMRS/"
-setwd(currentDir)
+# getwd()
+# currentDir = "/home/yzhang/Documents/Uni-Saarland/thesis/modeling/BMRS/"
+# setwd(currentDir)
 
 results <- read.csv("./formatted_results.csv")
 set.seed(123)
@@ -27,7 +27,7 @@ formula1 <- brmsformula(
 
 # PRIORS
 model1_priors <- c(
-  prior(normal(70, 5), class = "Intercept"),
+  prior(normal(0, 5), class = "Intercept"),
   # prior(lognormal(4.2, .3), class="Intercept"),
   prior(normal(0, 1), class = "b"),
   prior_string("lkj(2)", class = "cor")
@@ -40,13 +40,13 @@ model1 <- brm(
   data = results,
   family = gaussian(),
   prior = model1_priors, 
-  chains = 1,
-  iter = 1,
+  chains = 4,
+  iter = 4000,
   seed = 123
 )
 
 sink("./output/modelSummary.txt")
-print(summary(model1))
+print(summary(model1, options(width=2000)))
 sink()
 
 
