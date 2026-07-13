@@ -1,0 +1,117 @@
+> summary(model1) 
+ Family: gaussian 
+  Links: mu = identity 
+Formula: derivationStrength ~ speakerType + speakerGender + ToM + freqRatio + itemType + speakerType * itemType + speakerType * freqRatio + speakerType * speakerGender + speakerType * ToM + itemType * ToM + speakerType * ToM * itemType + speakerType * freqRatio * itemType + (1 | itemId) + (1 + speakerType + speakerGender | participantId) 
+   Data: results (Number of observations: 62) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Multilevel Hyperparameters:
+~itemId (Number of levels: 31) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     7.69      4.27     0.45    15.61 1.00      547     1426
+
+~participantId (Number of levels: 2) 
+                                            Estimate Est.Error l-95% CI
+sd(Intercept)                                  63.43     26.17    31.44
+sd(speakerTypenonnative)                        5.06      5.12     0.18
+sd(speakerGendermale)                           3.44      3.13     0.15
+cor(Intercept,speakerTypenonnative)             0.03      0.40    -0.73
+cor(Intercept,speakerGendermale)                0.08      0.39    -0.71
+cor(speakerTypenonnative,speakerGendermale)     0.03      0.41    -0.74
+                                            u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)                                 133.83 1.00     1265     1573
+sd(speakerTypenonnative)                       18.07 1.00     2482     1985
+sd(speakerGendermale)                          11.61 1.00     3333     2320
+cor(Intercept,speakerTypenonnative)             0.76 1.00     3573     2787
+cor(Intercept,speakerGendermale)                0.77 1.00     4380     2748
+cor(speakerTypenonnative,speakerGendermale)     0.77 1.00     3705     2851
+
+Regression Coefficients:
+                                                   Estimate Est.Error l-95% CI
+Intercept                                            -18.35     89.87  -197.11
+speakerTypenonnative                                   0.01      1.02    -2.02
+speakerGendermale                                      0.10      0.98    -1.82
+ToM                                                    0.00      1.00    -1.94
+freqRatio                                              0.26      0.94    -1.57
+itemTypeunambiguous                                   -0.00      1.02    -1.98
+speakerTypenonnative:itemTypeunambiguous              -0.02      0.98    -1.94
+speakerTypenonnative:freqRatio                        -0.03      1.00    -1.97
+speakerTypenonnative:speakerGendermale                 0.19      0.96    -1.69
+speakerTypenonnative:ToM                               0.13      0.10    -0.08
+ToM:itemTypeunambiguous                                0.37      0.08     0.21
+freqRatio:itemTypeunambiguous                         -0.04      0.95    -1.86
+speakerTypenonnative:ToM:itemTypeunambiguous          -0.12      0.11    -0.34
+speakerTypenonnative:freqRatio:itemTypeunambiguous    -0.01      0.95    -1.86
+                                                   u-95% CI Rhat Bulk_ESS
+Intercept                                            156.27 1.00     4772
+speakerTypenonnative                                   1.97 1.00     4584
+speakerGendermale                                      2.05 1.00     5528
+ToM                                                    1.98 1.00     4797
+freqRatio                                              2.05 1.00     4609
+itemTypeunambiguous                                    1.96 1.00     4994
+speakerTypenonnative:itemTypeunambiguous               1.85 1.00     4325
+speakerTypenonnative:freqRatio                         1.93 1.00     5404
+speakerTypenonnative:speakerGendermale                 2.05 1.00     4662
+speakerTypenonnative:ToM                               0.33 1.00     1882
+ToM:itemTypeunambiguous                                0.52 1.00     2354
+freqRatio:itemTypeunambiguous                          1.86 1.00     4357
+speakerTypenonnative:ToM:itemTypeunambiguous           0.08 1.00     2444
+speakerTypenonnative:freqRatio:itemTypeunambiguous     1.89 1.00     4481
+                                                   Tail_ESS
+Intercept                                              2750
+speakerTypenonnative                                   2847
+speakerGendermale                                      3131
+ToM                                                    2576
+freqRatio                                              2954
+itemTypeunambiguous                                    3092
+speakerTypenonnative:itemTypeunambiguous               3091
+speakerTypenonnative:freqRatio                         3213
+speakerTypenonnative:speakerGendermale                 2804
+speakerTypenonnative:ToM                               1949
+ToM:itemTypeunambiguous                                2473
+freqRatio:itemTypeunambiguous                          2809
+speakerTypenonnative:ToM:itemTypeunambiguous           2509
+speakerTypenonnative:freqRatio:itemTypeunambiguous     2750
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma    17.13      2.36    13.00    22.00 1.00      651     2248
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+Warning message:
+There were 11 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup 
+> fixef(model1)
+                                                        Estimate   Est.Error
+Intercept                                          -18.349017903 89.87279846
+speakerTypenonnative                                 0.009084586  1.01897002
+speakerGendermale                                    0.099757831  0.98048105
+ToM                                                  0.003526381  0.99667524
+freqRatio                                            0.258381700  0.94180532
+itemTypeunambiguous                                 -0.001009570  1.02271771
+speakerTypenonnative:itemTypeunambiguous            -0.015867795  0.98442892
+speakerTypenonnative:freqRatio                      -0.031090157  0.99792886
+speakerTypenonnative:speakerGendermale               0.187771137  0.96367149
+speakerTypenonnative:ToM                             0.130232079  0.10499945
+ToM:itemTypeunambiguous                              0.367198114  0.08069834
+freqRatio:itemTypeunambiguous                       -0.039212734  0.95320253
+speakerTypenonnative:ToM:itemTypeunambiguous        -0.123814720  0.10626306
+speakerTypenonnative:freqRatio:itemTypeunambiguous  -0.006532678  0.95442196
+                                                            Q2.5        Q97.5
+Intercept                                          -197.10890989 156.26873709
+speakerTypenonnative                                 -2.01812717   1.96700555
+speakerGendermale                                    -1.81796550   2.04807834
+ToM                                                  -1.94385813   1.98493446
+freqRatio                                            -1.57278669   2.04786747
+itemTypeunambiguous                                  -1.97606983   1.95869462
+speakerTypenonnative:itemTypeunambiguous             -1.94362232   1.84899999
+speakerTypenonnative:freqRatio                       -1.96941680   1.93283317
+speakerTypenonnative:speakerGendermale               -1.68957605   2.05473345
+speakerTypenonnative:ToM                             -0.08370724   0.32524208
+ToM:itemTypeunambiguous                               0.20838866   0.52347452
+freqRatio:itemTypeunambiguous                        -1.86094122   1.85587802
+speakerTypenonnative:ToM:itemTypeunambiguous         -0.33624826   0.07987876
+speakerTypenonnative:freqRatio:itemTypeunambiguous   -1.86094494   1.89307102
+
