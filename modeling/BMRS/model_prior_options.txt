@@ -1,0 +1,26 @@
+                  prior     class                                                       coef         group resp dpar nlpar lb ub tag       source
+                 (flat)         b                                                                                                         default
+                 (flat)         b                                                  freqRatio                                         (vectorized)
+                 (flat)         b                              freqRatio:itemTypeunambiguous                                         (vectorized)
+                 (flat)         b                                        itemTypeunambiguous                                         (vectorized)
+                 (flat)         b                                          nathan_score_full                                         (vectorized)
+                 (flat)         b                      nathan_score_full:itemTypeunambiguous                                         (vectorized)
+                 (flat)         b                                          speakerGendermale                                         (vectorized)
+                 (flat)         b                                       speakerTypenonnative                                         (vectorized)
+                 (flat)         b                             speakerTypenonnative:freqRatio                                         (vectorized)
+                 (flat)         b         speakerTypenonnative:freqRatio:itemTypeunambiguous                                         (vectorized)
+                 (flat)         b                   speakerTypenonnative:itemTypeunambiguous                                         (vectorized)
+                 (flat)         b                     speakerTypenonnative:nathan_score_full                                         (vectorized)
+                 (flat)         b speakerTypenonnative:nathan_score_full:itemTypeunambiguous                                         (vectorized)
+                 (flat)         b                     speakerTypenonnative:speakerGendermale                                         (vectorized)
+                 lkj(1)       cor                                                                                                         default
+                 lkj(1)       cor                                                            participantId                           (vectorized)
+ student_t(3, 4.6, 2.5) Intercept                                                                                                         default
+   student_t(3, 0, 2.5)        sd                                                                                           0             default
+   student_t(3, 0, 2.5)        sd                                                                   itemId                  0        (vectorized)
+   student_t(3, 0, 2.5)        sd                                                  Intercept        itemId                  0        (vectorized)
+   student_t(3, 0, 2.5)        sd                                                            participantId                  0        (vectorized)
+   student_t(3, 0, 2.5)        sd                                                  Intercept participantId                  0        (vectorized)
+   student_t(3, 0, 2.5)        sd                                          speakerGendermale participantId                  0        (vectorized)
+   student_t(3, 0, 2.5)        sd                                       speakerTypenonnative participantId                  0        (vectorized)
+   student_t(3, 0, 2.5)     sigma                                                                                           0             default
