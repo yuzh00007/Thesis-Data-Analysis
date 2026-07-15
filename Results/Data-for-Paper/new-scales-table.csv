@@ -1,0 +1,22 @@
+WEAK,STRONG,"CONTRA 
+% CORRECT","wk-str 
+ODD RATING","str-wk
+ODD RATING",ACCEPTED
+angry,outraged,81.82,20.45,74.91,1
+bad,atrocious,86.36,27.09,61.09,1
+brief,ephemeral,60.23,49.82,68.82,0
+decent,impeccable,78.41,62.73,66.55,0
+easy,trivial,61.36,35.45,62,1
+fancy,opulent,75,24.73,49.36,0
+hard,difficult,56.82,55.36,68,0
+heavy,onerous,65.91,42.09,59.36,0
+high,exorbitant,82.95,37,56.73,0
+messy,indecipherable,61.36,23.82,62.91,1
+nearby,adjoining,87.5,36.73,70.73,1
+plain,spartan,57.95,43.55,55.64,0
+sad,despondent,73.86,45.09,50.45,0
+sad,miserable,67.05,21.73,63,1
+similar,identical,87.5,29.55,72.27,1
+slow,glacial,67.05,42,55,0
+small,minuscule,82.95,33.73,74.45,1
+wet,drenched,82.95,24.18,63.09,1

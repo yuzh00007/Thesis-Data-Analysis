@@ -1,0 +1,46 @@
+debug,,,0,
+test,,,contradiction,
+TYPE,WORD1,WORD2,SUBJECT,EXPECTED
+weakstrong,bad,atrocious,It,NO
+weakstrong,brief,ephemeral,It,NO
+weakstrong,decent,impeccable,It,NO
+weakstrong,easy,trivial,It,NO
+weakstrong,fancy,opulent,It,NO
+weakstrong,heavy,onerous,It,NO
+weakstrong,high,exorbitant,It,NO
+weakstrong,angry,outraged,Charlie,NO
+weakstrong,nearby,adjoining,It,NO
+weakstrong,plain,spartan,It,NO
+weakstrong,sad,despondent,Alex,NO
+weakstrong,similar,identical,They,NO
+weakstrong,slow,glacial,It,NO
+weakstrong,small,miniscule,It,NO
+weakstrong,messy,indecipherable,It,NO
+weakstrong,wet,drenched,It,NO
+weakstrong,hard,difficult,It,NO
+weakstrong,sad,miserable,James,NO
+strongweak,atrocious,bad,It,YES
+strongweak,ephemeral,brief,It,YES
+strongweak,impeccable,decent,It,YES
+strongweak,trivial,easy,It,YES
+strongweak,opulent,fancy,It,YES
+strongweak,onerous,heavy,It,YES
+strongweak,exorbitant,high,It,YES
+strongweak,outraged,angry,Charlie,YES
+strongweak,adjoining,nearby,It,YES
+strongweak,spartan,plain,It,YES
+strongweak,despondent,sad,Alex,YES
+strongweak,identical,similar,They,YES
+strongweak,glacial,slow,It,YES
+strongweak,miniscule,small,It,YES
+strongweak,indecipherable,messy,It,YES
+strongweak,drenched,wet,It,YES
+strongweak,difficult,hard,It,YES
+strongweak,miserable,sad,James,YES
+filler,,,Jeff is happy and creative.,NO
+filler,,,Zack is shy and handsome.,NO
+filler,,,She is pleasant and charming. ,NO
+filler,,,It is new and used. ,YES
+filler,,,It is open and closed.,YES
+filler,,,It is wet and dry.,YES
+filler,,,It was expensive and cheap.,YES

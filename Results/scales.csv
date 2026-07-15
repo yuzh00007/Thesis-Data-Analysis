@@ -1,0 +1,41 @@
+WEAK,STRONG,CONTRA % CORRECT,wk-str ODDITY RATING,str-wk ODDITY RATING,PICTURE % CORRECT,ACCEPTED,90% Picture
+bad,atrocious,86.36,27.09,61.09,94.87,0,1
+brief,ephemeral,60.23,49.82,68.82,64.10,0,0
+decent,impeccable,78.41,62.73,66.55,97.44,0,0
+easy,trivial,61.36,35.45,62.00,79.49,0,0
+fancy,opulent,75.00,24.73,49.36,94.87,0,0
+heavy,onerous,65.91,42.09,59.36,61.54,0,0
+high,exorbitant,82.95,37.00,56.73,100.00,0,0
+angry,outraged,81.82,20.45,74.91,97.44,1,1
+nearby,adjoining,87.50,36.73,70.73,94.87,0,1
+plain,spartan,57.95,43.55,55.64,74.36,0,0
+sad,despondent,73.86,45.09,50.45,82.05,0,0
+similar,identical,87.50,29.55,72.27,97.44,1,1
+slow,glacial,67.05,42.00,55.00,71.79,0,0
+small,miniscule,82.95,33.73,74.45,97.44,1,1
+messy,indecipherable,61.36,23.82,62.91,94.87,0,1
+wet,drenched,82.95,24.18,63.09,100.00,1,1
+hard,difficult,56.82,55.36,68.00,74.36,0,0
+sad,miserable,67.05,21.73,63.00,89.74,0,0
+FROM APARICIO & RONAI,,,,,,,
+hot,scalding,,,,97.44,1,1
+soft,mushy,,,,100.00,1,1
+good,excellent,,,,100.00,1,1
+happy,delighted,,,,89.74,0,0
+fat,obese,,,,97.44,1,1
+funny,hilarious,,,,100.00,1,1
+cold,freezing,,,,100.00,1,1
+big,enormous,,,,100.00,1,1
+old,ancient,,,,100.00,1,1
+loud,deafening,,,,97.44,1,1
+TO BE TESTED,,,,,,,
+happy,ecstatic,,,,,,
+hard,unsolvable,,,,,,
+large,gigantic,,,,,,
+poor,destitute,,,,,,
+scared,petrified,,,,,,
+thick,impenetrable,,,,,,
+calm,meditative,,,,,,
+cold,frosty,,,,,,
+,,,,,,,
+,,,,,TOTAL SCALES:,13,16

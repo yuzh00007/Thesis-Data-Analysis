@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import time
+import glob
 import numpy as np
 import librosa
 import scipy.io.wavfile as wavfile
@@ -127,7 +128,7 @@ if __name__ == "__main__":
             if os.path.isfile(audioFilePath):
                 output_file = audioFilePath.replace(".wav", ".mp3")
 
-                # in case file exists
+                # in case file exists, skip it
                 if not os.path.isfile(output_file):
                     subprocess_mp3_args[2] = audioFilePath
                     subprocess_mp3_args[-1] = output_file
@@ -138,10 +139,9 @@ if __name__ == "__main__":
     for participant in os.scandir(audio_folder):
         partname = participant.name.replace("_audio", "")
         indiv_transcripts = [partname]
-        for audioFile in os.scandir(participant):
-            if audioFile.name.endswith('.mp3'):
-                text = extract_text(audioFile.path)
-                indiv_transcripts.append(text)
+        for audioFile in sorted(glob.glob(f'{participant.path}/*.mp3')):
+            text = extract_text(audioFile)
+            indiv_transcripts.append(text)
 
         all_transcripts.append(indiv_transcripts)
 

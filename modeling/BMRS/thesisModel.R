@@ -27,7 +27,8 @@ formula1 <- brmsformula(
 
 # PRIORS
 model1_priors <- c(
-  prior(normal(0, 5), class = "Intercept"),
+  prior(normal(87.5, 12.5), class = "Intercept"),
+  prior(normal(0, 12.5), class = "speakerType"),
   # prior(lognormal(4.2, .3), class="Intercept"),
   prior(normal(0, 1), class = "b"),
   prior_string("lkj(2)", class = "cor")

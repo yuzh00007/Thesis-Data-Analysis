@@ -1,0 +1,35 @@
+ItemID,Type,ImgOrder,Weak,Strong,Antonym,lowFreq1,lowFreq2,NOTES
+-1,practice,random,first,ninth,last,blocky,randomized,changed from umambiguous to one we did not use for this experiment
+-2,practice,random,tied,retro,stupid,hexagonal,chronic,"made stupid the unambiguous word,  changed other two"
+1,critical,random,soft,mushy,crunchy,panicked,introspective,
+2,critical,antFirst,good,excellent,bad,dramatic,technical,
+3,critical,random,funny,hilarious,boring,resilient,erratic,
+4,critical,reversed,cold,freezing,hot,fictional,communal,
+5,critical,antFirst,big,enormous,tiny,rural,creative,
+6,critical,random,old,ancient,new,illegal,crazy,changed pyramid pic to be clearer
+7,critical,random,large,gigantic,little,scattered,incapable,changed small->little
+8,critical,antFirst,wet,drenched,dry,ephemeral,rudimentary,droll ? rudimentary
+9,critical,random,happy,ecstatic,sad,anecdotal,extravagant,
+10,critical,antFirst,hot,scalding,cold,orchestral,gaunt,
+11,critical,antFirst,fat,obese,thin,monstrous,quaint,
+12,critical,antFirst,loud,deafening,quiet,nocturnal,molten,
+13,critical,random,angry,outraged,happy,relentless,optimal,
+14,critical,random,similar,identical,different,handsome,elegant,
+15,critical,reversed,small,minuscule,huge,nutritious,veritable,changed large->huge
+16,critical,random,scared,petrified,brave,nomadic,masterful,
+17,unambiguous,ordered,one,two,three,forty,null,
+18,unambiguous,random,green,blue,purple,maroon,pink,
+19,unambiguous,ordered,first,second,third,concentrated,orderly,middling to concentrated
+20,unambiguous,random,typed,additive,heavy,religious,beautiful,changed additive to low.png battery pic
+21,unambiguous,random,up,down,left,rhetorical,intrinsic,
+22,unambiguous,random,sunny,cloudy,rainy,definite,vacant,
+23,unambiguous,random,full,nearby,rare,pregnant,confident,
+24,unambiguous,random,light,far,extinct,ill,ongoing,
+25,unambiguous,random,yellow,red,beige,indigo,crimson,cyan to crimson
+26,unambiguous,random,gold,green,rosy,wealthy,dark,lavender to rosy
+27,unambiguous,random,alive,dead,neutral,accurate,detailed,two skull photos for non-alive
+28,unambiguous,random,male,female,unsure,youthful,thankful,
+29,unambiguous,random,elderly,young,ten,successful,double,
+30,unambiguous,random,six,four,five,multiple,literal,
+31,unambiguous,random,pointy,round,sharp,hazy,asleep,hazy
+32,unambiguous,random,odd,even,prime,passive,cloudy,

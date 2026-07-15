@@ -30,7 +30,7 @@ different,238,162411
 double,2222,15233
 down,7630,2436
 dramatic,2137,16233
-drenched,,
+drenched,20000,400
 rudimentary,12464,1036
 dry,1570,23809
 ecstatic,10656,1343
@@ -125,7 +125,7 @@ rhetorical,7626,2702
 round,2962,10771
 rural,2020,18665
 sad,2164,16163
-scalding,,
+scalding,20000,400
 scared,2990,10752
 scattered,7951,2267
 second,382,103621
@@ -144,7 +144,7 @@ third,585,67037
 three,135,266744
 tiny,1320,29756
 two,80,511027
-typed,,
+typed,20000,400
 unsure,8152,2185
 up,50,795534
 vacant,6858,2925
@@ -154,3 +154,5 @@ wet,2491,13963
 yellow,1675,22452
 young,235,160011
 youthful,7555,2456
+extinct,9567,1673
+six,90571,426
