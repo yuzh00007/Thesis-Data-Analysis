@@ -83,7 +83,7 @@ df_control <- df_parsed %>%
   summarise(mean_correct_control = mean(correct, na.rm = TRUE), .groups = "drop")
 # print the participants who failed to pass the minimum threshold
 low_accuracy <- df_control%>%
-  filter(mean_correct_control<0.8)
+  filter(mean_correct_control<0.5)
 print(low_accuracy$workerid)
 
 ################################################
