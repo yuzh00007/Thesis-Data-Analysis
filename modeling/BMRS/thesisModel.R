@@ -4,9 +4,31 @@ library(tidybayes)
 library(ggplot2)
 library(dplyr)
 
-# getwd()
-# currentDir = "/home/yzhang/Documents/Uni-Saarland/thesis/modeling/BMRS/"
-# setwd(currentDir)
+getwd()
+currentDir = "/home/yzhang/Documents/Uni-Saarland/thesis/modeling/BMRS/"
+setwd(currentDir)
+
+hist(results$nathan_score_full)
+
+nathanscores <- results %>% filter(
+  nathan_score_full > .6 & nathan_score_full < .9
+)
+nathanscores <- results %>% mutate(nathan_binned = cut(
+  nathan_score_full, breaks = seq(0,1,by=0.05), include.lowest=TRUE))
+
+results_avged <- nathanscores %>% 
+  group_by(nathan_binned, itemType) %>% summarize(mean_derivStrength = mean(derivationStrength), n=n())
+
+ggplot(
+  data = results_avged, 
+  aes(x= nathan_binned, y = mean_derivStrength, fill = itemType)) + geom_bar(stat='identity', position="dodge")
+
+
+ggplot(x=results_avged$nathan_binned, )
+# X axis: bin nathan: .5 -.6, etc
+# Y axis: AVG derivation for all items in each condition type
+
+
 
 results <- read.csv("./formatted_results.csv")
 set.seed(123)
@@ -30,7 +52,7 @@ set.seed(123)
 
 # FORMULA
 formula1 <- brmsformula(
-  derivationStrength ~ speakerType + speakerGender + nathan_score_full + freqRatio + itemType
+  derivationStrength ~ speakerType + speakerGender + nathan_score_full + freqRatio + itemType + trialid
   + speakerType * itemType
   + speakerType * freqRatio
   + speakerType * speakerGender
@@ -39,7 +61,7 @@ formula1 <- brmsformula(
   + speakerType * nathan_score_full * itemType
   + speakerType * freqRatio * itemType
   + (1|itemId)
-  + (1+speakerType+speakerGender|participantId)
+  + (1+speakerType+speakerGender+trialid|participantId)
 )
 
 # PRIORS
@@ -82,4 +104,4 @@ sink()
 
 
 pp_check(model1, ndraws = 30)
-# citation()
+print(report(model1, verbose = FALSE))
