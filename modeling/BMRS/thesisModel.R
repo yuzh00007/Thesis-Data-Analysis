@@ -104,4 +104,6 @@ sink()
 
 
 pp_check(model1, ndraws = 30)
-print(report(model1, verbose = FALSE))
+r <- report(model1, verbose = FALSE)
+print(r)
+print(as.data.frame(r))
