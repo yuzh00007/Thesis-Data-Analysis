@@ -1,16 +1,19 @@
  Family: gaussian 
   Links: mu = identity 
-Formula: derivationStrength ~ speakerType + speakerGender + nathan_score_full + freqRatio + itemType + speakerType * itemType + speakerType * freqRatio + speakerType * speakerGender + speakerType * nathan_score_full + itemType * nathan_score_full + speakerType * nathan_score_full * itemType + speakerType * freqRatio * itemType + (1 | itemId) + (1 + speakerType + speakerGender | participantId) 
-   Data: results (Number of observations: 1632) 
+Formula: derivationStrength ~ speakerType + speakerGender + nathan_score_full + freqRatio + itemType + trialid + speakerType * itemType + speakerType * freqRatio + speakerType * speakerGender + speakerType * nathan_score_full + itemType * nathan_score_full + speakerType * nathan_score_full * itemType + speakerType * freqRatio * itemType + (1 | itemId) + (1 + speakerType + speakerGender + trialid | participantId) 
+   Data: results (Number of observations: 2432) 
   Draws: 4 chains, each with iter = 4000; warmup = 1000; thin = 1;
          total post-warmup draws = 12000
 
 Priors:
 b ~ normal(0, 5)
-b_itemTypeunambiguous ~ normal(-25, 12.5)
+b_freqRatio:itemTypeunambiguous ~ normal(0, 12.5)
+b_itemTypeunambiguous ~ normal(25, 12.5)
+b_nathan_score_full ~ normal(0, 12.5)
+b_nathan_score_full:itemTypeunambiguous ~ normal(0, 12.5)
 b_speakerTypenonnative ~ normal(0, 12.5)
 b_speakerTypenonnative:itemTypeunambiguous ~ normal(0, 12.5)
-Intercept ~ normal(87.5, 12.5)
+Intercept ~ normal(75, 12.5)
 L ~ lkj_corr_cholesky(2)
 <lower=0> sd ~ student_t(3, 0, 2.5)
 <lower=0> sd_itemId_ ~ student_t(3, 0, 12.5)
@@ -20,38 +23,45 @@ L ~ lkj_corr_cholesky(2)
 Multilevel Hyperparameters:
 ~itemId (Number of levels: 32) 
               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sd(Intercept)    14.44      2.16    10.85    19.31 1.00     3324     5095
+sd(Intercept)    13.16      1.85    10.09    17.30 1.00     4515     7170
 
-~participantId (Number of levels: 51) 
+~participantId (Number of levels: 76) 
                                             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sd(Intercept)                                  11.11      1.55     8.40    14.51 1.00     3397     6335
-sd(speakerTypenonnative)                        4.67      2.13     0.47     8.66 1.00     1728     2807
-sd(speakerGendermale)                           3.47      1.86     0.27     7.11 1.00     2751     3984
-cor(Intercept,speakerTypenonnative)            -0.28      0.28    -0.72     0.38 1.00     7496     5537
-cor(Intercept,speakerGendermale)               -0.42      0.31    -0.85     0.35 1.00     7064     5878
-cor(speakerTypenonnative,speakerGendermale)     0.33      0.37    -0.54     0.87 1.00     3586     4595
+sd(Intercept)                                  12.06      1.49     9.45    15.20 1.00     4529     7810
+sd(speakerTypenonnative)                        2.37      1.59     0.09     5.86 1.00     3060     5806
+sd(speakerGendermale)                           1.57      1.16     0.06     4.34 1.00     5654     7380
+sd(trialid)                                     0.16      0.09     0.01     0.34 1.00     1752     4264
+cor(Intercept,speakerTypenonnative)            -0.15      0.32    -0.70     0.53 1.00    13037     8375
+cor(Intercept,speakerGendermale)               -0.12      0.34    -0.72     0.58 1.00    19899     9278
+cor(speakerTypenonnative,speakerGendermale)     0.04      0.38    -0.69     0.74 1.00    11382     8514
+cor(Intercept,trialid)                         -0.40      0.31    -0.83     0.38 1.00     8755     6100
+cor(speakerTypenonnative,trialid)              -0.05      0.37    -0.72     0.66 1.00     4989     7767
+cor(speakerGendermale,trialid)                 -0.02      0.37    -0.71     0.68 1.00     5546     8235
 
 Regression Coefficients:
                                                            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept                                                     73.18      7.25    59.21    87.74 1.00     4883     7027
-speakerTypenonnative                                          -2.75      5.16   -12.93     7.21 1.00     8142     8134
-speakerGendermale                                              2.12      1.59    -1.00     5.25 1.00    11974     9403
-nathan_score_full                                             -2.04      4.83   -11.49     7.53 1.00    16687     9387
-freqRatio                                                     -2.40      3.40    -9.18     4.26 1.00     5482     7213
-itemTypeunambiguous                                           15.84      7.37     1.10    30.01 1.00     3871     6190
-speakerTypenonnative:itemTypeunambiguous                       1.12      5.30    -9.23    11.52 1.00     8424     8303
-speakerTypenonnative:freqRatio                                -1.38      2.52    -6.20     3.61 1.00     7358     8144
-speakerTypenonnative:speakerGendermale                         0.62      2.11    -3.43     4.80 1.00    13685     9482
-speakerTypenonnative:nathan_score_full                        -0.40      4.58    -9.52     8.38 1.00    12610     9366
-nathan_score_full:itemTypeunambiguous                          9.42      4.65     0.33    18.60 1.00    12827     8693
-freqRatio:itemTypeunambiguous                                  1.66      3.64    -5.36     8.83 1.00     6556     7395
-speakerTypenonnative:nathan_score_full:itemTypeunambiguous     2.01      4.67    -7.19    11.16 1.00    12998     9198
-speakerTypenonnative:freqRatio:itemTypeunambiguous             0.67      2.71    -4.62     5.90 1.00     7937     9008
+Intercept                                                     57.37     10.52    36.59    77.93 1.00     8510     8824
+speakerTypenonnative                                          -0.70      4.94   -10.37     9.02 1.00    13093     9527
+speakerGendermale                                              2.01      1.34    -0.70     4.62 1.00    14373    10008
+nathan_score_full                                             -6.46     10.43   -26.98    13.95 1.00    11951     9367
+freqRatio                                                      2.54      3.86    -5.13     9.93 1.00     7551     8615
+itemTypeunambiguous                                           29.97      8.15    13.89    45.82 1.00     7823     8866
+trialid                                                        0.33      0.06     0.21     0.45 1.00    22179     9604
+speakerTypenonnative:itemTypeunambiguous                      -0.10      5.00    -9.86     9.69 1.00    11830     9070
+speakerTypenonnative:freqRatio                                -1.67      2.27    -6.12     2.79 1.00    11209     9622
+speakerTypenonnative:speakerGendermale                         0.38      1.82    -3.20     3.94 1.00    17016     9595
+speakerTypenonnative:nathan_score_full                        -0.74      4.57    -9.76     8.17 1.00    20876     8287
+nathan_score_full:itemTypeunambiguous                         13.38      8.20    -2.64    29.26 1.00    15822     9485
+freqRatio:itemTypeunambiguous                                 -2.55      4.70   -11.51     6.84 1.00     6393     7498
+speakerTypenonnative:nathan_score_full:itemTypeunambiguous     0.37      4.64    -8.64     9.45 1.00    18313     8949
+speakerTypenonnative:freqRatio:itemTypeunambiguous             1.45      2.48    -3.38     6.19 1.00    11320     9540
 
 Further Distributional Parameters:
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    23.99      0.44    23.15    24.86 1.00    11479     8438
+sigma    24.44      0.37    23.72    25.17 1.00    22949     8242
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).
+[1] "----------------------------"
+[1] "----------------------------"
