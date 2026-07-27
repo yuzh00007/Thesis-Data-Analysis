@@ -7,61 +7,110 @@ Formula: derivationStrength ~ speakerType + speakerGender + nathan_score_full + 
 
 Priors:
 b ~ normal(0, 5)
+b_freqRatio ~ normal(0, 12.5)
 b_freqRatio:itemTypeunambiguous ~ normal(0, 12.5)
 b_itemTypeunambiguous ~ normal(25, 12.5)
 b_nathan_score_full ~ normal(0, 12.5)
 b_nathan_score_full:itemTypeunambiguous ~ normal(0, 12.5)
 b_speakerTypenonnative ~ normal(0, 12.5)
 b_speakerTypenonnative:itemTypeunambiguous ~ normal(0, 12.5)
-Intercept ~ normal(75, 12.5)
+Intercept ~ normal(87.5, 12.5)
 L ~ lkj_corr_cholesky(2)
 <lower=0> sd ~ student_t(3, 0, 2.5)
-<lower=0> sd_itemId_ ~ student_t(3, 0, 12.5)
+<lower=0> sd_itemId_ ~ student_t(3, 0, 2.5)
 <lower=0> sd_participantId_ ~ student_t(3, 0, 12.5)
 <lower=0> sigma ~ student_t(3, 0, 2.5)
 
 Multilevel Hyperparameters:
 ~itemId (Number of levels: 32) 
               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sd(Intercept)    13.16      1.85    10.09    17.30 1.00     4515     7170
+sd(Intercept)    12.50      1.74     9.59    16.38 1.00     2799     5248
 
 ~participantId (Number of levels: 76) 
                                             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sd(Intercept)                                  12.06      1.49     9.45    15.20 1.00     4529     7810
-sd(speakerTypenonnative)                        2.37      1.59     0.09     5.86 1.00     3060     5806
-sd(speakerGendermale)                           1.57      1.16     0.06     4.34 1.00     5654     7380
-sd(trialid)                                     0.16      0.09     0.01     0.34 1.00     1752     4264
-cor(Intercept,speakerTypenonnative)            -0.15      0.32    -0.70     0.53 1.00    13037     8375
-cor(Intercept,speakerGendermale)               -0.12      0.34    -0.72     0.58 1.00    19899     9278
-cor(speakerTypenonnative,speakerGendermale)     0.04      0.38    -0.69     0.74 1.00    11382     8514
-cor(Intercept,trialid)                         -0.40      0.31    -0.83     0.38 1.00     8755     6100
-cor(speakerTypenonnative,trialid)              -0.05      0.37    -0.72     0.66 1.00     4989     7767
-cor(speakerGendermale,trialid)                 -0.02      0.37    -0.71     0.68 1.00     5546     8235
+sd(Intercept)                                  12.02      1.51     9.35    15.25 1.00     2958     5651
+sd(speakerTypenonnative)                        2.35      1.59     0.11     5.85 1.00     2046     4232
+sd(speakerGendermale)                           1.54      1.15     0.06     4.27 1.00     3557     4529
+sd(trialid)                                     0.15      0.09     0.01     0.34 1.00      946     2928
+cor(Intercept,speakerTypenonnative)            -0.15      0.33    -0.71     0.56 1.00     9081     7310
+cor(Intercept,speakerGendermale)               -0.11      0.35    -0.73     0.60 1.00    12014     8432
+cor(speakerTypenonnative,speakerGendermale)     0.04      0.38    -0.69     0.74 1.00     8381     8262
+cor(Intercept,trialid)                         -0.39      0.31    -0.82     0.40 1.00     4124     4862
+cor(speakerTypenonnative,trialid)              -0.05      0.37    -0.72     0.66 1.00     3943     6434
+cor(speakerGendermale,trialid)                 -0.01      0.38    -0.70     0.70 1.00     4039     7003
 
 Regression Coefficients:
                                                            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept                                                     57.37     10.52    36.59    77.93 1.00     8510     8824
-speakerTypenonnative                                          -0.70      4.94   -10.37     9.02 1.00    13093     9527
-speakerGendermale                                              2.01      1.34    -0.70     4.62 1.00    14373    10008
-nathan_score_full                                             -6.46     10.43   -26.98    13.95 1.00    11951     9367
-freqRatio                                                      2.54      3.86    -5.13     9.93 1.00     7551     8615
-itemTypeunambiguous                                           29.97      8.15    13.89    45.82 1.00     7823     8866
-trialid                                                        0.33      0.06     0.21     0.45 1.00    22179     9604
-speakerTypenonnative:itemTypeunambiguous                      -0.10      5.00    -9.86     9.69 1.00    11830     9070
-speakerTypenonnative:freqRatio                                -1.67      2.27    -6.12     2.79 1.00    11209     9622
-speakerTypenonnative:speakerGendermale                         0.38      1.82    -3.20     3.94 1.00    17016     9595
-speakerTypenonnative:nathan_score_full                        -0.74      4.57    -9.76     8.17 1.00    20876     8287
-nathan_score_full:itemTypeunambiguous                         13.38      8.20    -2.64    29.26 1.00    15822     9485
-freqRatio:itemTypeunambiguous                                 -2.55      4.70   -11.51     6.84 1.00     6393     7498
-speakerTypenonnative:nathan_score_full:itemTypeunambiguous     0.37      4.64    -8.64     9.45 1.00    18313     8949
-speakerTypenonnative:freqRatio:itemTypeunambiguous             1.45      2.48    -3.38     6.19 1.00    11320     9540
+Intercept                                                     54.66     11.27    32.64    76.86 1.00     4267     6618
+speakerTypenonnative                                          -0.50      4.88   -10.13     9.06 1.00     6517     7898
+speakerGendermale                                              1.99      1.37    -0.70     4.68 1.00    10667     9571
+nathan_score_full                                             -6.46     10.45   -26.93    13.78 1.00     6767     8728
+freqRatio                                                      5.05      5.08    -5.21    14.84 1.00     2923     4776
+itemTypeunambiguous                                           32.19      8.68    14.95    49.33 1.00     4379     6627
+trialid                                                        0.33      0.06     0.21     0.45 1.00    14038     8762
+speakerTypenonnative:itemTypeunambiguous                      -0.18      4.94    -9.74     9.29 1.00     6789     8281
+speakerTypenonnative:freqRatio                                -1.79      2.26    -6.18     2.77 1.00     5752     7440
+speakerTypenonnative:speakerGendermale                         0.42      1.86    -3.22     4.06 1.00    10338     9165
+speakerTypenonnative:nathan_score_full                        -0.83      4.50    -9.60     8.08 1.00    11253     9577
+nathan_score_full:itemTypeunambiguous                         14.45      8.34    -2.15    30.67 1.00     8662     8232
+freqRatio:itemTypeunambiguous                                 -5.05      5.59   -15.84     6.08 1.00     2862     4785
+speakerTypenonnative:nathan_score_full:itemTypeunambiguous     0.28      4.58    -8.76     9.30 1.00    11003     8722
+speakerTypenonnative:freqRatio:itemTypeunambiguous             1.54      2.45    -3.34     6.25 1.00     6050     7655
 
 Further Distributional Parameters:
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma    24.44      0.37    23.72    25.17 1.00    22949     8242
+sigma    24.45      0.36    23.75    25.19 1.00    14758     8526
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).
 [1] "----------------------------"
 [1] "----------------------------"
+Parameter                                                  |   Component | Median |          95% CI |     pd |  Rhat | ESS (tail) |       Fit
+---------------------------------------------------------------------------------------------------------------------------------------------
+(Intercept)                                                | conditional |  54.67 | [ 32.64, 76.86] |   100% | 1.000 |       6618 |          
+speakerTypenonnative                                       | conditional |  -0.47 | [-10.13,  9.06] | 53.86% | 1.000 |       7898 |          
+speakerGendermale                                          | conditional |   1.99 | [ -0.70,  4.68] | 92.49% | 1.000 |       9571 |          
+nathan_score_full                                          | conditional |  -6.47 | [-26.93, 13.78] | 73.17% | 1.000 |       8728 |          
+freqRatio                                                  | conditional |   5.12 | [ -5.21, 14.84] | 84.31% | 1.000 |       4776 |          
+itemTypeunambiguous                                        | conditional |  32.18 | [ 14.95, 49.33] | 99.98% | 1.000 |       6627 |          
+trialid                                                    | conditional |   0.33 | [  0.21,  0.45] |   100% | 1.001 |       8762 |          
+speakerTypenonnative:itemTypeunambiguous                   | conditional |  -0.15 | [ -9.74,  9.29] | 51.15% | 1.000 |       8281 |          
+speakerTypenonnative:freqRatio                             | conditional |  -1.82 | [ -6.18,  2.77] | 78.94% | 1.000 |       7440 |          
+speakerTypenonnative:speakerGendermale                     | conditional |   0.38 | [ -3.22,  4.06] | 58.47% | 1.000 |       9165 |          
+speakerTypenonnative:nathan_score_full                     | conditional |  -0.81 | [ -9.60,  8.08] | 57.34% | 1.000 |       9577 |          
+nathan_score_full:itemTypeunambiguous                      | conditional |  14.47 | [ -2.15, 30.67] | 95.71% | 1.000 |       8232 |          
+freqRatio:itemTypeunambiguous                              | conditional |  -5.13 | [-15.84,  6.08] | 81.63% | 1.000 |       4785 |          
+speakerTypenonnative:nathan_score_full:itemTypeunambiguous | conditional |   0.23 | [ -8.76,  9.30] | 52.12% | 1.000 |       8722 |          
+speakerTypenonnative:freqRatio:itemTypeunambiguous         | conditional |   1.57 | [ -3.34,  6.25] | 74.28% | 1.000 |       7655 |          
+sigma                                                      |       sigma |  24.45 | [ 23.75, 25.19] |   100% | 1.001 |       8526 |          
+                                                           |             |        |                 |        |       |            |          
+ELPD                                                       |             |        |                 |        |       |            | -11289.08
+LOOIC                                                      |             |        |                 |        |       |            |  22578.15
+WAIC                                                       |             |        |                 |        |       |            |  22577.30
+R2                                                         |             |        |                 |        |       |            |      0.53
+R2 (marginal)                                              |             |        |                 |        |       |            |      0.31
+R2 (adj.)                                                  |             |        |                 |        |       |            |      0.50
+R2_adjusted_marginal                                       |             |        |                 |        |       |            |      0.27
+Sigma                                                      |             |        |                 |        |       |            |     24.45
+[1] "----------------------------"
+We fitted a Bayesian linear mixed model (estimated using MCMC sampling with 4 chains of 4000 iterations and a warmup of 1000) to predict derivationStrength with speakerType, speakerGender, nathan_score_full, freqRatio, itemType and trialid (formula: derivationStrength ~ speakerType + speakerGender + nathan_score_full + freqRatio + itemType + trialid + speakerType * itemType + speakerType * freqRatio + speakerType * speakerGender + speakerType * nathan_score_full + itemType * nathan_score_full + speakerType * nathan_score_full * itemType + speakerType * freqRatio * itemType). The model included itemId as random effects (formula: list(~1 | itemId, ~1 + speakerType + speakerGender + trialid | participantId)). Priors were: b_Intercept ~ Normal(μ = 87.50, σ = 12.50), b_speakerTypenonnative ~ Normal(μ = 0.00, σ = 12.50), b_speakerGendermale ~ Normal(μ = 0.00, σ = 5.00), b_nathan_score_full ~ Normal(μ = 0.00, σ = 12.50), b_freqRatio ~ Normal(μ = 0.00, σ = 12.50), b_itemTypeunambiguous ~ Normal(μ = 25.00, σ = 12.50), b_trialid ~ Normal(μ = 0.00, σ = 5.00), b_speakerTypenonnative:itemTypeunambiguous ~ Normal(μ = 0.00, σ = 12.50), b_speakerTypenonnative:freqRatio ~ Normal(μ = 0.00, σ = 5.00), b_speakerTypenonnative:speakerGendermale ~ Normal(μ = 0.00, σ = 5.00), b_speakerTypenonnative:nathan_score_full ~ Normal(μ = 0.00, σ = 5.00), b_nathan_score_full:itemTypeunambiguous ~ Normal(μ = 0.00, σ = 12.50), b_freqRatio:itemTypeunambiguous ~ Normal(μ = 0.00, σ = 12.50), b_speakerTypenonnative:nathan_score_full:itemTypeunambiguous ~ Normal(μ = 0.00, σ = 5.00) and b_speakerTypenonnative:freqRatio:itemTypeunambiguous ~ Normal(μ = 0.00, σ = 5.00); sd_itemId__Intercept ~ Student-t⁺(df = 3.00, μ = 0.00, σ = 2.50), sd_participantId__Intercept ~ Student-t⁺(df = 3.00, μ = 0.00, σ = 12.50), sd_participantId__speakerTypenonnative ~ Student-t⁺(df = 3.00, μ = 0.00, σ = 12.50), sd_participantId__speakerGendermale ~ Student-t⁺(df = 3.00, μ = 0.00, σ = 12.50), sd_participantId__trialid ~
+Student-t⁺(df = 3.00, μ = 0.00, σ = 12.50) and σ ~ Student-t⁺(df = 3.00, μ = 0.00, σ = 2.50). The model's explanatory power is substantial (R2 = 0.53, 95% CI [0.51, 0.55], adj. R2 = 0.50) and the part related to the fixed effects alone (marginal R2) is of 0.31 (95% CI [0.22, 0.39]). Within this model:
+
+  - The effect of b Intercept (Median = 54.67, 95% CI [32.64, 76.86]) has a 100.00% probability of being positive (> 0), 100.00% of being significant (> 1.77), and 100.00% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative (Median = -0.47, 95% CI [-10.13, 9.06]) has a 53.86% probability of being negative (< 0), 39.72% of being significant (< -1.77), and 1.89% of being large (< -10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerGendermale (Median = 1.99, 95% CI [-0.70, 4.68]) has a 92.49% probability of being positive (> 0), 56.25% of being significant (> 1.77), and 0.00% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b nathan score full (Median = -6.47, 95% CI [-26.93, 13.78]) has a 73.17% probability of being negative (< 0), 67.35% of being significant (< -1.77), and 34.22% of being large (< -10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b freqRatio (Median = 5.12, 95% CI [-5.21, 14.84]) has a 84.31% probability of being positive (> 0), 74.78% of being significant (> 1.77), and 13.43% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b itemTypeunambiguous (Median = 32.18, 95% CI [14.95, 49.33]) has a 99.98% probability of being positive (> 0), 99.98% of being significant (> 1.77), and 99.31% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b trialid (Median = 0.33, 95% CI [0.21, 0.45]) has a 100.00% probability of being positive (> 0), 0.00% of being significant (> 1.77), and 0.00% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative × itemTypeunambiguous (Median = -0.15, 95% CI [-9.74, 9.29]) has a 51.15% probability of being negative (< 0), 37.50% of being significant (< -1.77), and 1.53% of being large (< -10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative × freqRatio (Median = -1.82, 95% CI [-6.18, 2.77]) has a 78.94% probability of being negative (< 0), 50.73% of being significant (< -1.77), and 8.33e-03% of being large (< -10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative × speakerGendermale (Median = 0.38, 95% CI [-3.22, 4.06]) has a 58.47% probability of being positive (> 0), 23.75% of being significant (> 1.77), and 0.00% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative × nathan score full (Median = -0.81, 95% CI [-9.60, 8.08]) has a 57.34% probability of being negative (< 0), 41.73% of being significant (< -1.77), and 1.30% of being large (< -10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b nathan score full × itemTypeunambiguous (Median = 14.47, 95% CI [-2.15, 30.67]) has a 95.71% probability of being positive (> 0), 93.53% of being significant (> 1.77), and 67.78% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b freqRatio × itemTypeunambiguous (Median = -5.13, 95% CI [-15.84, 6.08]) has a 81.63% probability of being negative (< 0), 72.82% of being significant (< -1.77), and 15.76% of being large (< -10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative × nathan score full × itemTypeunambiguous (Median = 0.23, 95% CI [-8.76, 9.30]) has a 52.12% probability of being positive (> 0), 36.91% of being significant (> 1.77), and 1.32% of being large (> 10.64). The estimation successfully converged (Rhat = 1.000)
+  - The effect of b speakerTypenonnative × freqRatio × itemTypeunambiguous (Median = 1.57, 95% CI [-3.34, 6.25]) has a 74.28% probability of being positive (> 0), 46.62% of being significant (> 1.77), and 8.33e-03% of being large (> 10.64). The estimation successfully converged (Rhat = 1.001)
+
+Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction (pd), the probability of significance and the probability of being large. The thresholds beyond which the effect is considered as significant (i.e., non-negligible) and large are |1.77| and |10.64| (corresponding respectively to 0.05 and 0.30 of the outcome's SD). Convergence and stability of the Bayesian sampling has been assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
