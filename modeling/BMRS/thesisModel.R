@@ -82,9 +82,10 @@ formula1 <- brmsformula(
 # PRIORS
 model1_priors <- c(
   # fixed effects
-  prior(normal(75, 12.5), class = "Intercept"),
+  prior(normal(87.5, 12.5), class = "Intercept"),
   prior(normal(0, 5), class = "b"),
   prior(normal(0, 12.5), class = "b", coef="nathan_score_full"),
+  prior(normal(0, 12.5), class = "b", coef="freqRatio"),
   prior(normal(0, 12.5), class = "b", coef="speakerTypenonnative"),
   prior(normal(25, 12.5), class = "b", coef="itemTypeunambiguous"),
   prior(normal(0, 12.5), class = "b", coef="speakerTypenonnative:itemTypeunambiguous"),
@@ -92,7 +93,7 @@ model1_priors <- c(
   prior(normal(0, 12.5), class = "b", coef="freqRatio:itemTypeunambiguous"),
 
   # random effects
-  prior(student_t(3, 0, 12.5), class = "sd", group="itemId"),
+  prior(student_t(3, 0, 2.5), class = "sd", group="itemId"),
   prior(student_t(3, 0, 12.5), class = "sd", group="participantId"),
 
   # residual standard deviation?
@@ -124,11 +125,11 @@ pp_check(model1, ndraws = 30)
 
 print("----------------------------")
 
+r <- report(model1, verbose = FALSE)
 print(as.data.frame(r))
 
 print("----------------------------")
 
-r <- report(model1, verbose = FALSE)
 print(r)
 
 sink()
