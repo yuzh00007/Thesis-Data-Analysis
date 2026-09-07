@@ -11,6 +11,9 @@ class RSAFrequencyModel:
         self.priors = priors
         self.cost_function = cost_function
 
+    def set_alpha(self, new_alpha):
+        self.alpha = new_alpha
+
     """
     function to normalize an array by dividing each row by its sum
     to obtain a probability distribution
